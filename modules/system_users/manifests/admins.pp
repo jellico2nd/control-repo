@@ -10,6 +10,7 @@ class system_users::admins {
           ensure  => present,
       comment     => 'First Last',
       home        => '/home/',
+      groups      => ['sysadmin', 'Users']
       # shell => '/bin/bash',
       # uid => '501',
       # gid => '20',
@@ -29,6 +30,6 @@ class system_users::admins {
   }
     package { 'csh':
       ensure => latest,
-    }
+     }
 }
 }
