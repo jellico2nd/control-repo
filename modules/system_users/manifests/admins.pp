@@ -1,21 +1,32 @@
 # == Class: class_name
 #
 class system_users::admins {
-  user { 'vito':
-    comment => 'First Last',
-    home => '/home/vito',
-    ensure => present,
-    shell => '/bin/csh',
-    # uid => '501',
-     gid => '5000',
-     require => Package['csh'],
-     groups => ['sysadmin'],
-  }
   group { 'sysadmin':
     ensure => present,
-    gid => 5000,
   }
-  package { 'csh':
-    ensure => latest,
+
+  if $facts['kernel'] == 'windows'{
+    user { 'name':
+        ensure => present,
+      # shell => '/bin/bash',
+      # uid => '501',
+      # gid => '20',
+    }
+  }
+  else
+  {
+    user { 'name':
+      ensure  => present,
+      comment => 'First Last',
+          home=> '/home/',
+        shell => '/bin/csh',
+      require => Package['csh']
+      # uid => '501',
+      # gid => '20',
+    }
+    }
+    package { 'csh':
+      ensure => latest,
+    }
   }
 }
