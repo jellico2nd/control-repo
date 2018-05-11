@@ -19,7 +19,6 @@ class nginx {
       source  => "puppet:///modules/${modulename}/files/index.html",
       path    => 'C:/ProgramData/nginx/html/',
       recurse => true,
-      require => User['vito'],
     }
   }
   else {
