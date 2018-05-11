@@ -30,6 +30,6 @@ class system_users::admins {
   }
     package { 'csh':
       ensure => latest,
-     }
+    }
 }
 }
