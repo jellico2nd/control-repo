@@ -3,7 +3,8 @@
 class nginx {
   # resources
   package { 'nginx':
-    ensure => installed,
+    ensure   => installed,
+    provider => 'chocolatey',
   }
 
   if($facts['kernel'] == 'windows')
