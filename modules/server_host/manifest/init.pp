@@ -2,8 +2,8 @@
 #
 class server_host {
   host { 'puppetserver':
-    ensure => 'present',
-    name   => ['puppet-fundamentals-server-10.local', 'puppet-fundamentals-server-10'],
-    ip     => '159.65.85.160',
+          ensure       => 'present',
+    host_aliases       => ['puppet-fundamentals-server-10.local', 'puppet-fundamentals-server-10'],
+              ip       => '159.65.85.160',
   }
 }
