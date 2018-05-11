@@ -1,7 +1,9 @@
 # == Class: class_name
 #
 class nginx {
-  # resources
+  $docPath = '/var/www',
+}
+{
   package { 'nginx':
     ensure   => installed,
   #  provider => 'chocolatey',
@@ -9,21 +11,26 @@ class nginx {
 
   if($facts['kernel'] == 'windows')
   {
-    file { 'index.html':
-      ensure => file,
-      mode   => '0755',
-      owner  => 'vito',
-      group  => 'Users',
-      source => "${classname}/modules/nginx/files/index.html",
-      path   => 'C:/ProgramData/nginx/html/',
+    file { '$docPath/index.html':
+      ensure  => file,
+      mode    => '0755',
+      owner   => 'vito',
+      group   => 'Users',
+      source  => "puppet:///modules/${modulename}/files/index.html",
+      path    => 'C:/ProgramData/nginx/html/',
+      recurse => true,
+      require => User['vito'],
     }
   }
   else {
-    file { 'index.html':
-      ensure => file,
-      mode   => '0755',
-      source => "${classname}/modules/nginx/files/index.html",
-      path   => '/var/www/',
+    file { '$docPath/index.html':
+      ensure  => file,
+      owner   => 'www-data',
+      group   => 'www-data',
+      mode    => '0755',
+      source  => "puppet:///modules/${modulename}/files/index.html",
+      path    => '/var/www/',
+      recurse => true,
     }
   }
 }
