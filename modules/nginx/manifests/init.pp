@@ -1,9 +1,8 @@
 # == Class: class_name
 #
-class nginx {
-  $docPath = '/var/www',
-}
-{
+class nginx (
+  String $docpath = '/var/www',
+) {
   package { 'nginx':
     ensure   => installed,
   #  provider => 'chocolatey',
@@ -11,7 +10,7 @@ class nginx {
 
   if($facts['kernel'] == 'windows')
   {
-    file { '$docPath/index.html':
+    file { '$docpath/index.html':
       ensure  => file,
       mode    => '0755',
       owner   => 'vito',
@@ -22,7 +21,7 @@ class nginx {
     }
   }
   else {
-    file { '$docPath/index.html':
+    file { '$docpath/index.html':
       ensure  => file,
       owner   => 'www-data',
       group   => 'www-data',
