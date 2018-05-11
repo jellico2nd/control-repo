@@ -14,7 +14,7 @@ class nginx {
       mode   => '0755',
       owner  => 'vito',
       group  => 'Users',
-      source => 'puppet:///modules/nginx/files/index.html',
+      source => 'puppet:///modules/nginx/files/',
       path   => 'C:/ProgramData/nginx/html/',
     }
   }
@@ -22,7 +22,7 @@ class nginx {
     file { 'index.html':
       ensure => file,
       mode   => '0755',
-      source => 'puppet:///modules/nginx/files/index.html',
+      source => 'puppet:///modules/nginx/files/',
       path   => '/var/www/',
     }
   }
