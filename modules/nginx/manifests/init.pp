@@ -4,7 +4,7 @@ class nginx {
   # resources
   package { 'nginx':
     ensure   => installed,
-    provider => 'chocolatey',
+  #  provider => 'chocolatey',
   }
 
   if($facts['kernel'] == 'windows')
@@ -14,7 +14,7 @@ class nginx {
       mode   => '0755',
       owner  => 'vito',
       group  => 'Users',
-      source => "${classname}/modules/nginx/files/",
+      source => "${classname}/modules/nginx/files/index.html",
       path   => 'C:/ProgramData/nginx/html/',
     }
   }
@@ -22,7 +22,7 @@ class nginx {
     file { 'index.html':
       ensure => file,
       mode   => '0755',
-      source => "${classname}/modules/nginx/files/",
+      source => "${classname}/modules/nginx/files/index.html",
       path   => '/var/www/',
     }
   }
